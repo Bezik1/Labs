@@ -54,6 +54,19 @@ class LinkedList {
         return false;
     }
 
+    public void updateElement(int data, int newData) {
+        if(head == null) { System.err.print("Element is not on the list"); return; }
+        Node currentElement = head;
+
+        while(currentElement != null) {
+            if(currentElement.data == data) {
+                currentElement.data = newData;
+                return;
+            }
+            currentElement = currentElement.child;
+        }
+    }
+
     public void removeElement(int data) {
         if (head == null) return;
 
@@ -67,7 +80,6 @@ class LinkedList {
         while (currentElement != null) {
             if (currentElement.data == data) {
                 prevElement.child = currentElement.child;
-                this.print();
                 return;
             }
             prevElement = currentElement;
@@ -76,6 +88,7 @@ class LinkedList {
 
         System.err.println("Element is not on the list!");
     }
+
 
     public void addElement(int data) {
         if(head == null) {
@@ -166,7 +179,7 @@ public class Exercises {
         linkedList.print();
 
         int element = input.nextInt();
-        linkedList.removeElement(element);
+        linkedList.updateElement(element, 100);
 
         System.out.println("Linked List after removing an element: ");
         linkedList.print();
