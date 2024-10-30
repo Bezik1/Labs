@@ -87,6 +87,101 @@ class Person {
     }
 }
 
+class PersonExerciseThree {
+    private String name;
+    private int age;
+    private boolean gender;
+    private int yearOfBirth;
+
+    private int currentYear = 2024;
+
+    public PersonExerciseThree() {}
+
+    public PersonExerciseThree(String name, int yearOfBirth, boolean gender) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.age = currentYear - yearOfBirth;
+        this.gender = gender;
+    }
+
+    public void displayInfo() {
+        System.out.print("Name: " + name +" ");
+        System.out.print("Year Of Birth: " + yearOfBirth + " ");
+        System.out.print("Age: " + age + " ");
+        System.out.print("Gender: " + (gender ? "Male" : "Female") + "\n");
+    }
+
+    // Getters
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public boolean getGender() {
+        return gender;
+    }
+
+    // Setters
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
+        this.age = currentYear - yearOfBirth;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+}
+
+class BankAccount {
+    private String accountNumber;
+    private double balance;
+
+    public BankAccount() {}
+
+    public BankAccount(String accountNumber, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+    }
+
+    public void deposit(double amount) {
+        if(amount < 0) { System.err.println("Amount must be positive!"); return; }
+
+        this.balance += amount;
+    }
+
+    public void withdraw(double amount) {
+        if(amount < 0) { System.err.println("Withdrawal amount must be positive!"); return; }
+        if(this.balance < amount) { System.err.println("There is no enough money!"); return; }
+
+        this.balance -= amount;
+    }
+
+    // Setter
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    // Getters
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
@@ -99,9 +194,50 @@ public class Main {
                 break;
             case 2:
                 exerciseTwo();
+            case 3:
+                exerciseThree();
+            case 4:
+                exerciseFour();
             default:
                 break;
         }
+    }
+
+    public static void exerciseFour() {
+        BankAccount bankAccountOne = new BankAccount("0xffffff", 100.0);
+        BankAccount bankAccountTwo = new BankAccount("0x000000", 50.0);
+
+        System.out.println("BankAccountOne Balance: " + bankAccountOne.getBalance());
+        System.out.println("BankAccountOne Balance: " + bankAccountTwo.getBalance());
+
+        bankAccountOne.withdraw(12.0);
+        bankAccountTwo.withdraw(40.0);
+
+        System.out.println("BankAccountOne Balance: " + bankAccountOne.getBalance());
+        System.out.println("BankAccountOne Balance: " + bankAccountTwo.getBalance());
+
+        bankAccountOne.withdraw(-12.0);
+        bankAccountTwo.withdraw(40.0);
+
+        System.out.println("BankAccountOne Balance: " + bankAccountOne.getBalance());
+        System.out.println("BankAccountOne Balance: " + bankAccountTwo.getBalance());
+
+        bankAccountOne.deposit(12.0);
+        bankAccountTwo.deposit(40.0);
+
+        System.out.println("BankAccountOne Balance: " + bankAccountOne.getBalance());
+        System.out.println("BankAccountOne Balance: " + bankAccountTwo.getBalance());
+
+        bankAccountOne.deposit(-12.0);
+        bankAccountTwo.deposit(40.0);
+    }
+
+    public static void exerciseThree() {
+        PersonExerciseThree person = new PersonExerciseThree("Mateusz", 2006, true);
+        person.displayInfo();
+
+        person.setYearOfBirth(2005);
+        person.displayInfo();
     }
 
     public static void exerciseOne() {
